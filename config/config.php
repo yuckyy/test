@@ -21,5 +21,6 @@ return [
         'encryption' => $_ENV['SMTP_ENCRYPTION'],
         'from_email' => $_ENV['SMTP_FROM_EMAIL'],
         'from_name' => $_ENV['SMTP_FROM_NAME'],
+        'to_email' => $_ENV['SMTP_TO_EMAIL'],
     ],
 ];

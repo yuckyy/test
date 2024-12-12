@@ -24,19 +24,19 @@ class EmailSender
         $this->mailer->Port = $smtpConfig['port'];
         $this->mailer->setFrom($smtpConfig['from_email'], $smtpConfig['from_name']);
         $this->mailer->isHTML(true);
+        $this->mailer->addAddress($smtpConfig['to_email']);
     }
 
-    public function send($email, $subject, $body)
+    public function send($subject, $body)
     {
         try {
-            $this->mailer->addAddress($email);
             $this->mailer->Subject = $subject;
             $this->mailer->Body = $body;
             $this->mailer->send();
             $this->mailer->clearAddresses();
             return true;
         } catch (Exception $e) {
-            echo "Ошибка при отправке письма на {$email}: {$this->mailer->ErrorInfo}\n";
+            echo "Ошибка при отправке письма : {$this->mailer->ErrorInfo}\n";
             return false;
         }
     }

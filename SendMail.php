@@ -8,7 +8,7 @@ $db = $services['db'];
 $emailSender = $services['emailSender'];
 $name = $_POST['name'];
 $email = $_POST['email'];
-$description = $_POST['description'];
+$description = $_POST['message'];
 
 $templatePath = __DIR__ . '/templates/email_template.php';
 
@@ -30,7 +30,7 @@ $templatePath = __DIR__ . '/templates/email_template.php';
 
         for ($i = 0; $i < $maxRetries; $i++) {
             try {
-                $emailSender->send($email, $emailTemplate->getSubject(), $emailTemplate->getBody());
+                $emailSender->send($emailTemplate->getSubject(), $emailTemplate->getBody());
 //                echo "Email sent successfully to $email" . PHP_EOL;
                 header('Content-Type: application/json');
                 echo json_encode([

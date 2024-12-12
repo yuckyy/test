@@ -94,7 +94,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = `finish.html?name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(data.email)}`;
+                    window.location.href = `finish.html?name=${encodeURIComponent(data.name)}`;
                     this.reset();
                 } else {
                     alert('Сталася помилка під час відправки форми. Спробуйте ще раз.');
