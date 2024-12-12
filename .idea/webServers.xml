@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="995ded63-86e4-4d31-874f-9310ea3fd446" name="myhost">
+        <fileTransfer rootFolder="/home/u136643523/domains/ten-tickets.com/public_html" accessType="SFTP" host="45.84.207.69" port="65002" sshConfigId="7cf44689-5733-4a92-b548-87937020ba57" sshConfig="u136643523@45.84.207.69:65002 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

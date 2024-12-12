@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Form</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="">
+    <div class="form-body">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content col-12 col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-items">
+                        <h3>Введіть данні</h3>
+                        <p>6weeks</p>
+                        <form class="requires-validation" id="userForm" novalidate>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" id="name" name="name" placeholder="Введіть ваше ім’я" >
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="email" name="email" id="email" placeholder="Введіть ваш email" required>
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback">Емейл не можу бути порожнім!</div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <input class="form-control" type="text" id="message" name="message" placeholder="Текстове поле" >
+                                <div class="valid-feedback"></div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+
+
+
+
+
+                            <div class="form-button mt-3">
+                                <button id="submit" type="submit" class="btn btn-primary">Відправити</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.requires-validation')
+        Array.from(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+
+    document.getElementById('userForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const errorMessage = document.getElementById('errorMessage');
+
+
+        // if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        //     errorMessage.style.display = 'block';
+        //     return;
+        // }
+        //
+        // errorMessage.style.display = 'none';
+
+        const formData = new FormData(this);
+        fetch('SendMail.php', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = `finish.html?name=${encodeURIComponent(data.name)}&email=${encodeURIComponent(data.email)}`;
+                    this.reset();
+                } else {
+                    alert('Сталася помилка під час відправки форми. Спробуйте ще раз.');
+                }
+            })
+            .catch(() => {
+                // alert('Сталася помилка під час відправки форми.');
+            });
+
+    });
+</script>
+
+<script src="js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="js/app.js" ></script>
+
+</body>
+
+</html>
